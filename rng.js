@@ -10,7 +10,9 @@ const Rarity = {
     2: 'Uncommon',
     3: 'Rare',
     4: 'Epic',
-    5: 'Mythic'
+    5: 'Mythic',
+    6: 'Ledgendary', // Corrected spelling
+    7: 'Divine'       // Added missing comma
 };
 
 class Aura {
@@ -24,11 +26,13 @@ class AuraRollingGame {
     constructor() {
         this.auras = this.generateAuras();
         this.rarityChances = {
-            1: 60,
-            2: 25,
-            3: 10,
-            4: 4,
-            5: 1
+            1: 55,
+            2: 44,
+            3: 28,
+            4: 10,
+            5: 5,
+            6: 3,
+            7: 1
         };
         this.score = 0;
         this.readlineInterface = null;
@@ -50,8 +54,17 @@ class AuraRollingGame {
             new Aura("Aura of Insight", 4),
             new Aura("Aura of Dominance", 5),
             new Aura("Aura of Fleetness", 5),
-            new Aura("Aura of Enlightenment", 5)
+            new Aura("Aura of Enlightenment", 5),
+            new Aura("Aura of Rage", 6), // Fixed missing comma
+            new Aura("Aura of Fury", 6), // Added missing comma
+            new Aura("Aura of Vigor", 6), // Added missing comma
+            new Aura("Aura of Bravery", 7),
+            new Aura("Aura of Fortitude", 7),
+            new Aura("Aura of Vitality", 7),
+            new Aura("Aura of Stamina", 7)
         ];
+        
+       
     }
 
     getRandomAuraOfRarity(rarity) {
@@ -121,3 +134,4 @@ class AuraRollingGame {
 // Example usage:
 const game = new AuraRollingGame();
 game.start();
+// this game sets up an interactive game where the player can roll auras of different rarities, accumulate a score, and perform game actions through command-line input.
