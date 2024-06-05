@@ -31,7 +31,7 @@ class AuraRollingGame {
             5: 1
         };
         this.score = 0;
-        this.init();
+        this.readlineInterface = null;
     }
 
     generateAuras() {
@@ -54,6 +54,11 @@ class AuraRollingGame {
         ];
     }
 
+    getRandomAuraOfRarity(rarity) {
+        const aurasOfRarity = this.auras.filter(aura => aura.rarity === rarity);
+        return aurasOfRarity[Math.floor(Math.random() * aurasOfRarity.length)];
+    }
+
     rollAura() {
         const randomNumber = Math.random() * 100;
         let cumulativeChance = 0;
@@ -61,8 +66,7 @@ class AuraRollingGame {
         for (const rarity in this.rarityChances) {
             cumulativeChance += this.rarityChances[rarity];
             if (randomNumber < cumulativeChance) {
-                const aurasOfRarity = this.auras.filter(aura => aura.rarity === Number(rarity));
-                const rolledAura = aurasOfRarity[Math.floor(Math.random() * aurasOfRarity.length)];
+                const rolledAura = this.getRandomAuraOfRarity(Number(rarity));
                 console.log(`You rolled: ${rolledAura.name} (${Rarity[rolledAura.rarity]})`);
                 this.score += rolledAura.rarity;
                 console.log(`Your current score is: ${this.score}`);
@@ -101,7 +105,7 @@ class AuraRollingGame {
         }
     }
 
-    init() {
+    async start() {
         this.readlineInterface = readline.createInterface({
             input: process.stdin,
             output: process.stdout
@@ -116,3 +120,4 @@ class AuraRollingGame {
 
 // Example usage:
 const game = new AuraRollingGame();
+game.start();
